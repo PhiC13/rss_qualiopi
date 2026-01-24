@@ -23,7 +23,7 @@ jobs:
           pip install feedparser
 
       - name: Generate RSS feeds
-        working-directory: rss
+        working-directory: docs
         run: |
           python aggregate.py
 
@@ -31,6 +31,6 @@ jobs:
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
-          git add rss/*.xml
+          git add docs/*.xml
           git commit -m "Update RSS feeds" || echo "No changes"
           git push
