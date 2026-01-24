@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Historique des logs RSS COSMOS</title>
+
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 8px; }
+        th { background: #f0f0f0; cursor: pointer; }
+        tr:nth-child(even) { background: #fafafa; }
+        .level-INFO { color: #0066cc; }
+        .level-ERROR { color: #cc0000; font-weight: bold; }
+        .filters { margin-bottom: 20px; }
+        .filters label { margin-right: 10px; }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<h1>Historique des logs RSS COSMOS</h1>
+<p>Affichage dynamique basé sur <code>logs.jsonl</code></p>
+
+<div class="filters">
+    <label>
+        Niveau :
+        <select id="filterLevel">
+            <option value="">Tous</option>
+            <option value="INFO">INFO</option>
+            <option value="ERROR">ERROR</option>
+        </select>
+    </label>
+
+    <label>
+        Événement :
+        <select id="filterEvent">
+            <option value="">Tous</option>
+        </select>
+    </label>
+
+    <label>
+        Date :
+        <input type="date" id="filterDate">
+    </label>
+
+    <button onclick="applyFilters()">Filtrer</button>
+</div>
+
+<canvas id="activityChart" width="600" height="200"></canvas>
+
+<table id="logTable">
+    <thead>
+        <tr>
+            <th>Horodatage</th>
+            <th>Niveau</th>
+            <th>Événement</th>
+            <th>Données</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<script>
+let allLogs = [];
+
+async function loadLogs() {
+    const response = await fetch("logs.jsonl");
+    const text = await response.text();
+
+    allLogs = text
+        .split("\n")
+        .filter(line => line.trim())
+        .map(line => JSON.parse(line));
+
+    populateEventFilter();
+    renderTable(allLogs);
+    renderChart(allLogs);
+}
+
+function populateEventFilter() {
+    const eventSelect = document.getElementById("filterEvent");
+    const events = [...new Set(allLogs.map(l => l.event))].sort();
+
+    events.forEach(ev => {
+        const opt = document.createElement("option");
+        opt.value = ev;
+        opt.textContent = ev;
+        eventSelect.appendChild(opt);
+    });
+}
+
+function applyFilters() {
+    const level = document.getElementById("filterLevel").value;
+    const event = document.getElementById("filterEvent").value;
+    const date = document.getElementById("filterDate").value;
+
+    let filtered = allLogs;
+
+    if (level) {
+        filtered = filtered.filter(l => l.level === level);
+    }
+
+    if (event) {
+        filtered = filtered.filter(l => l.event === event);
+    }
+
+    if (date) {
+        filtered = filtered.filter(l => l.timestamp.startsWith(date));
+    }
+
+    renderTable(filtered);
+    renderChart(filtered);
+}
+
+function renderTable(logs) {
+    const tbody = document.querySelector("#logTable tbody");
+    tbody.innerHTML = "";
+
+    logs.forEach(entry => {
+        const tr = document.createElement("tr");
+
+        tr.innerHTML = `
+            <td>${entry.timestamp}</td>
+            <td class="level-${entry.level}">${entry.level}</td>
+            <td>${entry.event}</td>
+            <td><pre>${JSON.stringify(entry, null, 2)}</pre></td>
+        `;
+
+        tbody.appendChild(tr);
+    });
+}
+
+function renderChart(logs) {
+    const counts = {};
+
+    logs.forEach(l => {
+        const day = l.timestamp.substring(0, 10);
+        counts[day] = (counts[day] || 0) + 1;
+    });
+
+    const labels = Object.keys(counts).sort();
+    const values = labels.map(d => counts[d]);
+
+    const ctx = document.getElementById("activityChart").getContext("2d");
+
+    if (window.activityChart) {
+        window.activityChart.destroy();
+    }
+
+    window.activityChart = new Chart(ctx, {
+        type: "line",
+        data: {
+            labels: labels,
+            datasets: [{
+                label: "Nombre d'exécutions",
+                data: values,
+                borderColor: "#0066cc",
+                backgroundColor: "rgba(0, 102, 204, 0.2)",
+                tension: 0.2
+            }]
+        },
+        options: {
+            scales: {
+                x: { title: { display: true, text: "Date" } },
+                y: { title: { display: true, text: "Exécutions" }, beginAtZero: true }
+            }
+        }
+    });
+}
+
+loadLogs();
+</script>
+
+</body>
+</html>
