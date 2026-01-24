@@ -1,0 +1,187 @@
+/* -----------------------------------------
+   1. VARIABLES
+----------------------------------------- */
+:root {
+    --yellow: #f7c600;
+    --dark: #222;
+    --light: #fff;
+    --grey: #f5f5f5;
+    --blue: #003366;
+}
+
+/* -----------------------------------------
+   2. BASE
+----------------------------------------- */
+body {
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: var(--grey);
+    color: var(--dark);
+}
+
+/* -----------------------------------------
+   3. HEADER
+----------------------------------------- */
+header {
+    background: var(--blue);
+    color: var(--light);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    border-bottom: 4px solid var(--yellow);
+}
+
+header .logo {
+    height: 48px;
+}
+
+header .title-block h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+header .title-block p {
+    margin: 0;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+/* -----------------------------------------
+   4. MENU HORIZONTAL
+----------------------------------------- */
+.top-menu {
+    background: var(--light);
+    padding: 6px 20px;
+    display: flex;
+    gap: 25px;
+    border-bottom: 2px solid var(--blue);
+    align-items: center;
+}
+
+.top-menu a {
+    color: var(--blue);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 4px 0;
+    transition: 0.2s;
+}
+
+.top-menu a:hover {
+    color: var(--yellow);
+}
+
+/* -----------------------------------------
+   5. LAYOUT
+----------------------------------------- */
+.layout {
+    display: flex;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.main-column {
+    flex: 3;
+}
+
+.sidebar {
+    flex: 1;
+    background: var(--light);
+    padding: 20px;
+    border-radius: 6px;
+    border-left: 5px solid var(--yellow);
+    position: sticky;
+    top: 20px;
+}
+
+/* -----------------------------------------
+   6. BLOCS EXTENSIBLES
+----------------------------------------- */
+details.section-block {
+    background: var(--light);
+    padding: 15px 20px;
+    border-radius: 6px;
+    border-left: 5px solid var(--yellow);
+    margin-bottom: 20px;
+}
+
+details summary {
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+details[open] summary {
+    color: var(--blue);
+}
+
+/* -----------------------------------------
+   7. ARTICLES
+----------------------------------------- */
+.article {
+    background: var(--light);
+    padding: 15px;
+    border-radius: 6px;
+    border-left: 5px solid var(--yellow);
+    margin-bottom: 15px;
+}
+
+.article h3 {
+    margin: 0 0 6px 0;
+    font-size: 18px;
+}
+
+.article small {
+    color: #666;
+}
+
+.article-mini {
+    margin-bottom: 12px;
+}
+
+.article-mini a {
+    color: var(--blue);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.article-mini small {
+    display: block;
+    color: #666;
+}
+
+/* -----------------------------------------
+   8. SIDEBAR MENU
+----------------------------------------- */
+.side-menu {
+    margin-top: 30px;
+}
+
+.side-menu a {
+    display: block;
+    padding: 8px 0;
+    color: var(--dark);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.side-menu a:hover {
+    color: var(--blue);
+}
+
+/* -----------------------------------------
+   9. FOOTER
+----------------------------------------- */
+footer {
+    margin-top: 60px;
+    padding: 20px;
+    text-align: center;
+    background: var(--dark);
+    color: var(--light);
+}

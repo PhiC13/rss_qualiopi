@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Agrégateur RSS – Philippe</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+
+<body>
+
+<header>
+    <img src="img/Logo_LBJ-13A.png" alt="Logo Le Bateau Jaune" class="logo">
+    <div class="title-block">
+        <h1>Veille réglementaire, pédagogique et métiers</h1>
+        <p>Agrégateur</p>
+    </div>
+</header>
+
+<nav class="top-menu">
+    <a href="index.html">Accueil</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="logs.jsonl">Logs</a>
+</nav>
+
+<div class="layout">
+
+    <!-- COLONNE GAUCHE -->
+    <div class="main-column">
+
+        <!-- Flux global détaillé -->
+        <section class="section-block">
+            <h2>Derniers articles (flux global)</h2>
+            <div id="articles"></div>
+        </section>
+
+        <!-- Veille légale -->
+        <details class="section-block" open>
+            <summary>Veille légale & réglementaire</summary>
+
+            <p>Flux consolidé :
+                <a href="flux_legal.xml" target="_blank">flux_legal.xml</a>
+            </p>
+
+            <!-- SOURCES EXTERNES -->
+            <div id="legal-service-public"></div>
+            <div id="legal-travail"></div>
+            <div id="legal-economie"></div>
+
+            <!-- Flux consolidé -->
+            <div id="articles-legal"></div>
+        </details>
+
+        <!-- Veille pédagogique -->
+        <details class="section-block">
+            <summary>Veille pédagogique & technologique</summary>
+
+            <p>Flux consolidé :
+                <a href="flux_pedago.xml" target="_blank">flux_pedago.xml</a>
+            </p>
+
+            <!-- SOURCES EXTERNES -->
+            <div id="pedago-digiforma"></div>
+
+            <!-- Flux consolidé -->
+            <div id="articles-pedago"></div>
+        </details>
+
+        <!-- Veille métiers -->
+        <details class="section-block">
+            <summary>Évolution métiers & compétences (Sport / Plongée)</summary>
+
+            <p>Flux consolidé :
+                <a href="flux_metiers.xml" target="_blank">flux_metiers.xml</a>
+            </p>
+
+            <!-- SOURCES EXTERNES -->
+            <div id="metiers-injep"></div>
+            <div id="metiers-ffessm"></div>
+
+            <!-- Flux consolidé -->
+            <div id="articles-metiers"></div>
+        </details>
+
+    </div>
+
+    <!-- COLONNE DROITE -->
+    <aside class="sidebar">
+        <h3>Activité récente</h3>
+        <canvas id="activityChart" width="300" height="200"></canvas>
+
+        <h3>Derniers articles (toutes rubriques)</h3>
+        <div id="articles-global"></div>
+    </aside>
+
+</div>
+
+<footer>
+    Agrégateur RSS – Philippe – Propulsé par Python & o2switch
+</footer>
+
+<!-- Scripts dans le bon ordre -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="assets/js/feeds-local.js"></script>
+<script src="assets/js/feeds-external.js"></script>
+<script src="assets/js/activity-chart.js"></script>
+<script src="assets/js/main.js"></script>
+
+</body>
+</html>
