@@ -1,0 +1,12 @@
+# Les fichiers XML générés automatiquement par GitHub Actions
+# En cas de conflit, on garde toujours la version distante (celle générée par le cron)
+docs/xml/*.xml merge=theirs
+
+# Les logs générés automatiquement
+docs/xml/logs.jsonl merge=theirs
+
+# Les fichiers JSON générés automatiquement
+docs/xml/sources.json merge=theirs
+docs/xml/*.xml merge=theirs
+docs/xml/logs.jsonl merge=theirs
+docs/xml/sources.json merge=theirs
