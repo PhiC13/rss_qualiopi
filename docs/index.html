@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Agrégateur RSS – Philippe</title>
+    <title>Veille Le Bateau Jaune – Philippe</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="assets/style.css">
 </head>
@@ -20,7 +20,11 @@
 <nav class="top-menu">
     <a href="index.html">Accueil</a>
     <a href="dashboard.html">Dashboard</a>
-    <a href="logs.jsonl">Logs</a>
+    <a href="xml/logs.jsonl" target="_blank">Logs</a>
+
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Rechercher dans tous les articles…">
+    </div>
 </nav>
 
 <div class="layout">
@@ -28,19 +32,13 @@
     <!-- COLONNE GAUCHE -->
     <div class="main-column">
 
-        <!-- Flux global détaillé -->
-        <section class="section-block">
-            <h2>Derniers articles (flux global)</h2>
-            <div id="articles"></div>
-        </section>
-
         <!-- Veille légale -->
         <details class="section-block" open>
             <summary>Veille légale & réglementaire</summary>
 
-            <p>Flux consolidé :
-                <a href="flux_legal.xml" target="_blank">flux_legal.xml</a>
-            </p>
+            <div class="flux-consolidated">
+                <a href="xml/flux_legal.xml" target="_blank">flux_legal.xml</a>
+            </div>
 
             <!-- SOURCES EXTERNES -->
             <div id="legal-service-public"></div>
@@ -55,9 +53,9 @@
         <details class="section-block">
             <summary>Veille pédagogique & technologique</summary>
 
-            <p>Flux consolidé :
-                <a href="flux_pedago.xml" target="_blank">flux_pedago.xml</a>
-            </p>
+            <div class="flux-consolidated">
+                <a href="xml/flux_pedago.xml" target="_blank">flux_pedago.xml</a>
+            </div>
 
             <!-- SOURCES EXTERNES -->
             <div id="pedago-digiforma"></div>
@@ -70,9 +68,9 @@
         <details class="section-block">
             <summary>Évolution métiers & compétences (Sport / Plongée)</summary>
 
-            <p>Flux consolidé :
-                <a href="flux_metiers.xml" target="_blank">flux_metiers.xml</a>
-            </p>
+            <div class="flux-consolidated">
+                <a href="xml/flux_metiers.xml" target="_blank">flux_metiers.xml</a>
+            </div>
 
             <!-- SOURCES EXTERNES -->
             <div id="metiers-injep"></div>

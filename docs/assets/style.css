@@ -100,7 +100,7 @@ header .title-block p {
 }
 
 /* -----------------------------------------
-   6. BLOCS EXTENSIBLES
+   6. BLOCS EXTENSIBLES (SECTIONS)
 ----------------------------------------- */
 details.section-block {
     background: var(--light);
@@ -124,25 +124,9 @@ details[open] summary {
 /* -----------------------------------------
    7. ARTICLES
 ----------------------------------------- */
-.article {
-    background: var(--light);
-    padding: 15px;
-    border-radius: 6px;
-    border-left: 5px solid var(--yellow);
-    margin-bottom: 15px;
-}
-
-.article h3 {
-    margin: 0 0 6px 0;
-    font-size: 18px;
-}
-
-.article small {
-    color: #666;
-}
-
 .article-mini {
-    margin-bottom: 12px;
+    font-size: 0.85rem;
+    margin-bottom: 4px;
 }
 
 .article-mini a {
@@ -156,27 +140,64 @@ details[open] summary {
     color: #666;
 }
 
-/* -----------------------------------------
-   8. SIDEBAR MENU
------------------------------------------ */
-.side-menu {
-    margin-top: 30px;
-}
-
-.side-menu a {
-    display: block;
-    padding: 8px 0;
-    color: var(--dark);
-    text-decoration: none;
+/* Blocs par source */
+.article-group > summary {
+    font-size: 0.9rem;
     font-weight: 600;
+    cursor: pointer;
 }
 
-.side-menu a:hover {
-    color: var(--blue);
+/* Sources vides */
+.empty-source > summary {
+    color: #999 !important;
+    font-size: 0.75rem !important;
+    font-weight: 500 !important;
+    opacity: 0.7;
+}
+
+.empty-source > summary::before {
+    color: #bbb !important;
 }
 
 /* -----------------------------------------
-   9. FOOTER
+   8. BARRE DE RECHERCHE
+----------------------------------------- */
+.search-bar {
+    margin: 20px auto;
+    max-width: 600px;
+    text-align: center;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+/* -----------------------------------------
+   9. FLUX CONSOLIDÉ
+----------------------------------------- */
+.flux-consolidated {
+    text-align: right;
+    font-size: 0.7rem;
+    color: #777;
+    margin-top: 6px;
+    margin-bottom: -4px;
+}
+
+.flux-consolidated a {
+    color: #777;
+    text-decoration: none;
+}
+
+.flux-consolidated a:hover {
+    text-decoration: underline;
+}
+
+/* -----------------------------------------
+   10. FOOTER
 ----------------------------------------- */
 footer {
     margin-top: 60px;

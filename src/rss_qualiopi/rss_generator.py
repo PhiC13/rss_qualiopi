@@ -1,12 +1,16 @@
 from datetime import datetime
 from email.utils import format_datetime
 from xml.sax.saxutils import escape
+from pathlib import Path
 
-def generate_rss(articles, output_file="rss.xml"):
+def generate_rss(articles):
+    # Trouver la racine du projet (2 niveaux au-dessus du fichier actuel)
+    project_root = Path(__file__).resolve().parents[2]
+    output_file = project_root / "docs" / "xml" / "rss_cosmos.xml"
+
     rss_items = ""
 
     for art in articles:
-        # Conversion date ISO → RFC 822
         pub_date = ""
         if art["date"]:
             try:
@@ -39,3 +43,5 @@ def generate_rss(articles, output_file="rss.xml"):
 
     with open(output_file, "w", encoding="utf-8") as f:
         f.write(rss_feed)
+
+    print(f"[OK] Flux COSMOS généré : {output_file}")

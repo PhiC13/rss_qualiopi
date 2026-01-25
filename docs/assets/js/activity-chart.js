@@ -1,49 +1,57 @@
-async function loadActivityChart() {
-    const canvas = document.getElementById("activityChart");
-    if (!canvas) return;
+// ------------------------------------------------------------
+//  activity-chart.js
+//  Met à jour le graphique d'activité à partir d'une liste de dates
+// ------------------------------------------------------------
 
-    const response = await fetch("rss_final.xml");
-    const text = await response.text();
+let activityChart = null;
 
-    const parser = new DOMParser();
-    const xml = parser.parseFromString(text, "application/xml");
+function updateActivityChart(dates) {
+    if (!dates || dates.length === 0) return;
 
-    const items = [...xml.querySelectorAll("item")];
-
+    // Regrouper les dates par jour
     const counts = {};
-    items.forEach(item => {
-        const pub = item.querySelector("pubDate");
-        if (!pub) return;
-        const date = new Date(pub.textContent);
-        if (isNaN(date)) return;
-        const key = date.toISOString().split("T")[0];
+    dates.forEach(d => {
+        if (isNaN(d)) return;
+        const key = d.toISOString().slice(0, 10); // YYYY-MM-DD
         counts[key] = (counts[key] || 0) + 1;
     });
 
-    const labels = Object.keys(counts).sort();
-    const values = labels.map(l => counts[l]);
+    // Trier les dates
+    const sortedKeys = Object.keys(counts).sort();
 
-    const ctx = canvas.getContext("2d");
+    const labels = sortedKeys;
+    const values = sortedKeys.map(k => counts[k]);
 
-    new Chart(ctx, {
-        type: "line",
+    const ctx = document.getElementById("activityChart").getContext("2d");
+
+    // Détruire l'ancien graphique si nécessaire
+    if (activityChart) {
+        activityChart.destroy();
+    }
+
+    // Nouveau graphique
+    activityChart = new Chart(ctx, {
+        type: "bar",
         data: {
             labels: labels,
             datasets: [{
-                label: "Articles par jour",
+                label: "Articles publiés",
                 data: values,
-                borderColor: "#003366",
-                backgroundColor: "rgba(0, 51, 102, 0.2)",
-                borderWidth: 2,
-                tension: 0.3
+                backgroundColor: "rgba(0, 102, 204, 0.6)",
+                borderColor: "rgba(0, 102, 204, 1)",
+                borderWidth: 1
             }]
         },
         options: {
             responsive: true,
-            plugins: { legend: { display: false } },
             scales: {
-                x: { ticks: { maxRotation: 45, minRotation: 45 } },
-                y: { beginAtZero: true }
+                x: {
+                    ticks: { maxRotation: 45, minRotation: 45 }
+                },
+                y: {
+                    beginAtZero: true,
+                    ticks: { stepSize: 1 }
+                }
             }
         }
     });

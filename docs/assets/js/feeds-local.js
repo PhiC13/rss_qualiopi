@@ -1,69 +1,94 @@
-// --------- Flux global détaillé (rss_final.xml) ----------
-async function loadArticles() {
-    const container = document.getElementById("articles");
-    if (!container) return;
-
-    const response = await fetch("rss_final.xml");
-    const text = await response.text();
-
-    const parser = new DOMParser();
-    const xml = parser.parseFromString(text, "application/xml");
-
-    const items = [...xml.querySelectorAll("item")].slice(0, 10);
-
-    items.forEach(item => {
-        const title = item.querySelector("title")?.textContent || "";
-        const link = item.querySelector("link")?.textContent || "";
-        const date = item.querySelector("pubDate")?.textContent || "";
-        const desc = item.querySelector("description")?.textContent || "";
-
-        const div = document.createElement("div");
-        div.className = "article";
-
-        div.innerHTML = `
-            <h3><a href="${link}" target="_blank">${title}</a></h3>
-            <small>${date}</small>
-            <p>${desc}</p>
-        `;
-
-        container.appendChild(div);
-    });
-}
-
-// --------- Flux XML locaux (3 rubriques + condensé global) ----------
-async function loadFeed(url, containerId, limit = 5, mini = false) {
+// ------------------------------------------------------------
+//  Lecture d'un flux RSS local
+// ------------------------------------------------------------
+async function loadLocalRSS(url, containerId, label) {
     const container = document.getElementById(containerId);
     if (!container) return;
 
-    const response = await fetch(url);
-    const text = await response.text();
+    try {
+        const response = await fetch(url);
+        const text = await response.text();
 
-    const parser = new DOMParser();
-    const xml = parser.parseFromString(text, "application/xml");
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(text, "text/xml");
 
-    const items = [...xml.querySelectorAll("item")].slice(0, limit);
+        const items = Array.from(xml.querySelectorAll("item")).slice(0, 10);
 
-    items.forEach(item => {
-        const title = item.querySelector("title")?.textContent || "";
-        const link = item.querySelector("link")?.textContent || "";
-        const date = item.querySelector("pubDate")?.textContent || "";
+        // Création du bloc source
+        const details = document.createElement("details");
+        details.className = "article-group";
 
-        const div = document.createElement("div");
-        div.className = mini ? "article-mini" : "article";
+        // Summary AVANT d'ajouter la classe empty-source
+        const summary = document.createElement("summary");
+        summary.textContent = `${label} (${items.length})`;
+        details.appendChild(summary);
 
-        div.innerHTML = mini
-            ? `<a href="${link}" target="_blank">${title}</a><small>${date}</small>`
-            : `<h3><a href="${link}" target="_blank">${title}</a></h3><small>${date}</small>`;
+        // Si aucun article → style spécial + bloc non ouvrable
+        if (items.length === 0) {
+            details.classList.add("empty-source");
 
-        container.appendChild(div);
+            summary.addEventListener("click", (e) => {
+                e.preventDefault();   // empêche l'ouverture
+                e.stopPropagation();
+            });
+        }
+
+        container.appendChild(details);
+
+        // Articles
+        items.forEach(item => {
+            const div = document.createElement("div");
+            div.className = "article-mini";
+
+            const title = item.querySelector("title")?.textContent ?? "Sans titre";
+            const link = item.querySelector("link")?.textContent ?? "#";
+            const date = item.querySelector("pubDate")?.textContent ?? "";
+
+            div.innerHTML = `
+                <a href="${link}" target="_blank">${title}</a>
+                <small>${date}</small>
+            `;
+            details.appendChild(div);
+        });
+
+    } catch (err) {
+        console.error("Erreur flux local :", url, err);
+    }
+}
+
+
+// ------------------------------------------------------------
+//  Chargement automatique via sources.json
+// ------------------------------------------------------------
+async function loadLocalFeeds() {
+    const response = await fetch("xml/sources.json");
+    const sources = await response.json();
+
+    // Fonction utilitaire pour générer un label propre
+    const cleanLabel = (src) =>
+        src.replace("xml/", "")
+           .replace(".xml", "")
+           .replace("rss_", "")
+           .toUpperCase();
+
+    // Légal
+    sources.legal.forEach(src => {
+        loadLocalRSS(src, "articles-legal", cleanLabel(src));
+    });
+
+    // Pédago
+    sources.pedago.forEach(src => {
+        loadLocalRSS(src, "articles-pedago", cleanLabel(src));
+    });
+
+    // Métiers
+    sources.metiers.forEach(src => {
+        loadLocalRSS(src, "articles-metiers", cleanLabel(src));
     });
 }
 
-function loadLocalFeeds() {
-    loadFeed("flux_legal.xml", "articles-legal");
-    loadFeed("flux_pedago.xml", "articles-pedago");
-    loadFeed("flux_metiers.xml", "articles-metiers");
 
-    // Condensé global
-    loadFeed("rss_final.xml", "articles-global", 10, true);
-}
+// ------------------------------------------------------------
+//  Lancement
+// ------------------------------------------------------------
+loadLocalFeeds();

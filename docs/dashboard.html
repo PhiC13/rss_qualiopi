@@ -2,71 +2,118 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Historique des logs RSS COSMOS</title>
+    <title>Dashboard – Historique des logs RSS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- Style global -->
+    <link rel="stylesheet" href="assets/style.css">
+
+    <!-- Style spécifique au tableau -->
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
+        .log-container {
+            background: var(--light);
+            padding: 20px;
+            border-radius: 6px;
+            border-left: 5px solid var(--yellow);
+            margin: 30px auto;
+            max-width: 1200px;
+        }
+
         table { border-collapse: collapse; width: 100%; margin-top: 20px; }
         th, td { border: 1px solid #ccc; padding: 8px; }
         th { background: #f0f0f0; cursor: pointer; }
         tr:nth-child(even) { background: #fafafa; }
+
         .level-INFO { color: #0066cc; }
         .level-ERROR { color: #cc0000; font-weight: bold; }
+
         .filters { margin-bottom: 20px; }
-        .filters label { margin-right: 10px; }
+        .filters label { margin-right: 20px; font-weight: 600; }
     </style>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
 
-<h1>Historique des logs RSS COSMOS</h1>
-<p>Affichage dynamique basé sur <code>logs.jsonl</code></p>
+<!-- -----------------------------------------
+     HEADER IDENTIQUE À index.html
+------------------------------------------ -->
+<header>
+    <img src="img/Logo_LBJ-13A.png" alt="Logo Le Bateau Jaune" class="logo">
+    <div class="title-block">
+        <h1>Dashboard – Historique des logs RSS</h1>
+        <p>Suivi des exécutions & diagnostics</p>
+    </div>
+</header>
 
-<div class="filters">
-    <label>
-        Niveau :
-        <select id="filterLevel">
-            <option value="">Tous</option>
-            <option value="INFO">INFO</option>
-            <option value="ERROR">ERROR</option>
-        </select>
-    </label>
+<nav class="top-menu">
+    <a href="index.html">Accueil</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="xml/logs.jsonl" target="_blank">Logs bruts</a>
 
-    <label>
-        Événement :
-        <select id="filterEvent">
-            <option value="">Tous</option>
-        </select>
-    </label>
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Rechercher dans les logs…">
+    </div>
+</nav>
 
-    <label>
-        Date :
-        <input type="date" id="filterDate">
-    </label>
+<!-- -----------------------------------------
+     CONTENU PRINCIPAL
+------------------------------------------ -->
+<div class="log-container">
 
-    <button onclick="applyFilters()">Filtrer</button>
+    <h2>Historique des logs RSS COSMOS</h2>
+    <p>Affichage dynamique basé sur <code>xml/logs.jsonl</code></p>
+
+    <div class="filters">
+        <label>
+            Niveau :
+            <select id="filterLevel">
+                <option value="">Tous</option>
+                <option value="INFO">INFO</option>
+                <option value="ERROR">ERROR</option>
+            </select>
+        </label>
+
+        <label>
+            Événement :
+            <select id="filterEvent">
+                <option value="">Tous</option>
+            </select>
+        </label>
+
+        <label>
+            Date :
+            <input type="date" id="filterDate">
+        </label>
+
+        <button onclick="applyFilters()">Filtrer</button>
+    </div>
+
+    <canvas id="activityChart" width="600" height="200"></canvas>
+
+    <table id="logTable">
+        <thead>
+            <tr>
+                <th>Horodatage</th>
+                <th>Niveau</th>
+                <th>Événement</th>
+                <th>Données</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
 </div>
 
-<canvas id="activityChart" width="600" height="200"></canvas>
-
-<table id="logTable">
-    <thead>
-        <tr>
-            <th>Horodatage</th>
-            <th>Niveau</th>
-            <th>Événement</th>
-            <th>Données</th>
-        </tr>
-    </thead>
-    <tbody></tbody>
-</table>
-
+<!-- -----------------------------------------
+     SCRIPTS
+------------------------------------------ -->
 <script>
 let allLogs = [];
 
 async function loadLogs() {
-    const response = await fetch("logs.jsonl");
+    const response = await fetch("xml/logs.jsonl");
     const text = await response.text();
 
     allLogs = text
@@ -98,17 +145,9 @@ function applyFilters() {
 
     let filtered = allLogs;
 
-    if (level) {
-        filtered = filtered.filter(l => l.level === level);
-    }
-
-    if (event) {
-        filtered = filtered.filter(l => l.event === event);
-    }
-
-    if (date) {
-        filtered = filtered.filter(l => l.timestamp.startsWith(date));
-    }
+    if (level) filtered = filtered.filter(l => l.level === level);
+    if (event) filtered = filtered.filter(l => l.event === event);
+    if (date) filtered = filtered.filter(l => l.timestamp.startsWith(date));
 
     renderTable(filtered);
     renderChart(filtered);
@@ -145,9 +184,7 @@ function renderChart(logs) {
 
     const ctx = document.getElementById("activityChart").getContext("2d");
 
-    if (window.activityChart) {
-        window.activityChart.destroy();
-    }
+    if (window.activityChart) window.activityChart.destroy();
 
     window.activityChart = new Chart(ctx, {
         type: "line",

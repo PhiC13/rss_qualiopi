@@ -3,34 +3,46 @@ name: Generate RSS Feeds
 on:
   schedule:
     - cron: "0 * * * *"   # exécution toutes les heures
-  workflow_dispatch:       # déclenchement manuel
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
+      # 1) Checkout
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      # 2) Installer Poetry proprement
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
         with:
-          python-version: "3.11"
+          version: 1.8.3
+          virtualenvs-create: true
+          virtualenvs-in-project: true
 
+      # 3) Installer les dépendances du projet Python principal
       - name: Install dependencies
         run: |
-          pip install feedparser
+          poetry install --no-interaction --no-root
 
-      - name: Generate RSS feeds
+      # 4) Exécuter le scraper COSMOS (dans src/rss_qualiopi/)
+      - name: Run COSMOS scraper
+        run: |
+          poetry run python src/rss_qualiopi/scraper.py
+
+      # 5) Exécuter l’agrégateur (dans docs/)
+      - name: Run RSS aggregator
         working-directory: docs
         run: |
-          python aggregate.py
+          poetry run python aggregate.py
 
+      # 6) Commit des fichiers générés dans docs/xml/
       - name: Commit and push generated XML
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
-          git add docs/*.xml
+          git add docs/xml
           git commit -m "Update RSS feeds" || echo "No changes"
           git push
