@@ -1,50 +1,49 @@
-# Génération automatique des flux RSS pour le projet Qualiopi
-
-name: Generate RSS Feeds
+name: Generate RSS
 
 on:
-  schedule:
-    - cron: "0 * * * *"   # exécution toutes les heures
   workflow_dispatch:
+  schedule:
+    - cron: "0 */4 * * *"   # toutes les 4 heures
+
+permissions:
+  contents: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      # 1) Checkout
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2) Installer Poetry proprement
-      - name: Install Poetry
-        uses: snok/install-poetry@v1
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          version: 1.8.3
-          virtualenvs-create: true
-          virtualenvs-in-project: true
+          python-version: "3.12"
 
-      # 3) Installer les dépendances du projet Python principal
+      - name: Install Poetry
+        run: pip install poetry
+
+      - name: Configure Poetry (no virtualenv in project)
+        run: poetry config virtualenvs.in-project false
+
       - name: Install dependencies
-        run: |
-          poetry install --no-interaction --no-root
+        run: poetry install --no-interaction --no-root
 
-      # 4) Exécuter le scraper COSMOS (dans src/rss_qualiopi/)
       - name: Run COSMOS scraper
-        run: |
-          poetry run python src/rss_qualiopi/scraper.py
+        run: poetry run python docs/scraper_cosmos.py
 
-      # 5) Exécuter l’agrégateur (dans docs/)
-      - name: Run RSS aggregator
-        working-directory: docs
-        run: |
-          poetry run python aggregate.py
+      - name: Run RSS aggregator (CI mode)
+        env:
+          CI: "true"
+        run: poetry run python docs/aggregate.py
 
-      # 6) Commit des fichiers générés dans docs/xml/
-      - name: Commit and push generated XML
+      - name: Commit and push generated files
         run: |
           git config user.name "github-actions"
-          git config user.email "actions@github.com"
-          git add docs/xml
-          git commit -m "Update RSS feeds" || echo "No changes"
+          git config user.email "github-actions@github.com"
+          git add docs/xml/*
+          git add docs/xml/sources.json
+          git add docs/xml/logs.jsonl || true
+          git commit -m "Update RSS feeds" || echo "No changes to commit"
           git push
