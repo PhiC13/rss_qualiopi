@@ -1,3 +1,5 @@
+# Génération automatique des flux RSS pour le projet Qualiopi
+
 name: Generate RSS Feeds
 
 on:
