@@ -21,6 +21,7 @@ EXTERNAL_METIERS = [
     "https://phic13.github.io/rss_qualiopi/rss.xml",
     "https://www.ffessm.fr/actualites/rss",
     "https://injep.fr/feed/",
+    "https://www.plongez.fr/feed",
 ]
 
 # --------------------------------------------------------------------
