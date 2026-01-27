@@ -127,7 +127,7 @@ def generate_local_sources():
     # Mode CI : on réduit les flux pour accélérer
     if IS_CI:
         log("Mode CI : réduction des flux externes")
-        all_sources["metiers"] = []  # Les plus lents
+      #  all_sources["metiers"] = []  # Les plus lents
 
     local_files = {"legal": [], "pedago": [], "metiers": []}
 
