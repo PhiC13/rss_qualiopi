@@ -6,10 +6,10 @@
     "xml/rss_cosmos.xml"
   ],
   "pedago": [
-    "xml/rss_digiforma-veille_com.xml",
-    "xml/rss_digiforma_com.xml",
-    "xml/rss_eduscol_education_fr.xml",
     "xml/rss_economie_gouv_fr.xml",
+    "xml/rss_digiforma-veille_com.xml",
+    "xml/rss_eduscol_education_fr.xml",
+    "xml/rss_digiforma_com.xml",
     "xml/rss_centre-inffo_fr.xml"
   ],
   "metiers": [
