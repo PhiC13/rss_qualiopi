@@ -14,8 +14,8 @@
   ],
   "metiers": [
     "xml/rss_phic13_github_io.xml",
-    "xml/rss_plongez_fr.xml",
     "xml/rss_ffessm_fr.xml",
-    "xml/rss_injep_fr.xml"
+    "xml/rss_injep_fr.xml",
+    "xml/rss_plongez_fr.xml"
   ]
 }
