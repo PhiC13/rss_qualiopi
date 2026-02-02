@@ -1,21 +1,21 @@
 {
   "legal": [
     "xml/rss_travail-emploi_gouv_fr.xml",
-    "xml/rss_service-public_fr.xml",
     "xml/rss_economie_gouv_fr.xml",
+    "xml/rss_service-public_fr.xml",
     "xml/rss_cosmos.xml"
   ],
   "pedago": [
     "xml/rss_digiforma-veille_com.xml",
-    "xml/rss_economie_gouv_fr.xml",
     "xml/rss_digiforma_com.xml",
+    "xml/rss_economie_gouv_fr.xml",
     "xml/rss_eduscol_education_fr.xml",
     "xml/rss_centre-inffo_fr.xml"
   ],
   "metiers": [
     "xml/rss_phic13_github_io.xml",
-    "xml/rss_ffessm_fr.xml",
     "xml/rss_plongez_fr.xml",
+    "xml/rss_ffessm_fr.xml",
     "xml/rss_injep_fr.xml"
   ]
 }
