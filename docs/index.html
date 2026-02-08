@@ -91,6 +91,22 @@
 		<!-- Bloc 1 : Activité récente -->
 		<div class="sidebar-block">
 			<h3><span class="icon">📊</span> Activité récente</h3>
+			<div class="activity-controls">
+				<label>Affichage :</label>
+				<select id="activityMode">
+					<option value="day" selected>Jour</option>
+					<option value="week">Semaine</option>
+					<option value="month">Mois</option>
+				</select>
+
+				<label>Période :</label>
+				<select id="activityRange">
+					<option value="7">7 jours</option>
+					<option value="30" selected>30 jours</option>
+					<option value="90">90 jours</option>
+					<option value="all">Tout</option>
+				</select>
+			</div>
 			<canvas id="activityChart" width="300" height="200"></canvas>
 		</div>
 

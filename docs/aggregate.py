@@ -220,9 +220,21 @@ if __name__ == "__main__":
 
     log(f"done: {len(data['global'])} articles")
 
-    # ------------------------------------------------------------
-    # 4. Mise à jour du timestamp de dernière génération
-    # ------------------------------------------------------------
+
+    # 4. Historique d'activité (activity_history.jsonl)
+    history_path = OUTPUT_DIR / "activity_history.jsonl"
+
+    entry = {
+        "timestamp": datetime.utcnow().isoformat() + "Z",
+        "count": len(data["global"])
+    }
+
+    with open(history_path, "a", encoding="utf-8") as f:
+        f.write(json.dumps(entry) + "\n")
+
+    log(f"Historique mis à jour : {history_path}")
+
+    # 5. Mise à jour du timestamp de dernière génération
     from datetime import datetime, UTC
     import json
 
