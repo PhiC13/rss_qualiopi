@@ -206,3 +206,121 @@ footer {
     background: var(--dark);
     color: var(--light);
 }
+
+/* -----------------------------------------
+   11. ADMIN SOURCES
+----------------------------------------- */
+
+.admin-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.token-box {
+    background: var(--light);
+    padding: 15px 20px;
+    border-radius: 6px;
+    border-left: 5px solid var(--yellow);
+    margin-bottom: 25px;
+}
+
+.sources-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.source-item {
+    background: var(--light);
+    padding: 15px 20px;
+    border-radius: 6px;
+    border-left: 5px solid var(--blue);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.favicon {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.source-actions button {
+    margin-left: 8px;
+}
+
+.btn-edit {
+    background: var(--blue);
+    color: var(--light);
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-delete {
+    background: #cc0000;
+    color: var(--light);
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.source-form {
+    background: var(--light);
+    padding: 20px;
+    border-radius: 6px;
+    border-left: 5px solid var(--yellow);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#validation-status {
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+/* -----------------------------------------
+   12. PIPELINE STATUS
+----------------------------------------- */
+
+.pipeline-badge {
+    margin-left: auto;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.pipeline-ok {
+    background: #d4f8d4;
+    color: #0a7a0a;
+}
+
+.pipeline-ko {
+    background: #ffd4d4;
+    color: #a30000;
+}
+
+.pipeline-ok-box,
+.pipeline-ko-box {
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}
+
+.pipeline-ok-box {
+    background: #e8ffe8;
+    border-left: 5px solid #0a7a0a;
+}
+
+.pipeline-ko-box {
+    background: #ffe8e8;
+    border-left: 5px solid #a30000;
+}

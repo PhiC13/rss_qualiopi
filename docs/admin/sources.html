@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestion des sources RSS</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body>
+
+  <header>
+    <img src="../assets/img/logo.png" class="logo" alt="">
+    <div class="title-block">
+      <h1>Administration des sources RSS</h1>
+      <p>Ajouter, modifier, supprimer les flux Qualiopi</p>
+    </div>
+  </header>
+
+  <nav class="top-menu">
+    <a href="../index.html">Accueil</a>
+    <a href="sources.html">Sources</a>
+  </nav>
+
+  <div class="admin-container">
+
+    <section class="token-box">
+      <label for="token">Token GitHub (fine-grained)</label>
+      <input type="password" id="token" placeholder="ghp_xxxxx" />
+      <button id="save-token" class="btn-primary">Enregistrer le token</button>
+    </section>
+
+    <section id="sources-list" class="sources-list"></section>
+
+    <hr>
+
+    <h2 id="form-title">Ajouter une source</h2>
+
+    <form id="source-form" class="source-form">
+      <label>Nom</label>
+      <input type="text" id="src-name" required>
+
+      <label>URL du flux</label>
+      <input type="url" id="src-url" required>
+
+      <label>Catégorie</label>
+      <input type="text" id="src-cat">
+
+      <input type="hidden" id="src-index">
+
+      <div id="validation-status"></div>
+
+      <button type="submit" class="btn-primary">Enregistrer</button>
+    </form>
+
+  </div>
+
+  <script src="../assets/js/sources-admin.js"></script>
+</body>
+</html>

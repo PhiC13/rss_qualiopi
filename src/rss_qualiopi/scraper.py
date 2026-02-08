@@ -86,5 +86,5 @@ if __name__ == "__main__":
         print(f"[INFO] {len(articles)} articles récupérés.")
 
     # On génère le flux directement dans /docs
-    output_file = Path(__file__).resolve().parents[2] / "docs" / "rss_cosmos.xml"
+    output_file = Path(__file__).resolve().parents[2] / "docs" / "xml""rss_cosmos.xml"
     generate_rss(articles, output_file)

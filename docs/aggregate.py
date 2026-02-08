@@ -200,19 +200,37 @@ def generate_sources_json(local_files):
 
 
 # ------------------------------------------------------------
-#  MAIN
+# MAIN
 # ------------------------------------------------------------
 if __name__ == "__main__":
     log("start")
 
+    # 1. Génération des flux locaux (externes)
     local_files = generate_local_sources()
 
+    # 2. Agrégation
     data = aggregate_grouped(local_files)
     generate_rss_file("flux_legal.xml", data["legal"])
     generate_rss_file("flux_pedago.xml", data["pedago"])
     generate_rss_file("flux_metiers.xml", data["metiers"])
     generate_rss_file("rss_final.xml", data["global"])
 
+    # 3. sources.json
     generate_sources_json(local_files)
 
     log(f"done: {len(data['global'])} articles")
+
+    # ------------------------------------------------------------
+    # 4. Mise à jour du timestamp de dernière génération
+    # ------------------------------------------------------------
+    from datetime import datetime, UTC
+    import json
+
+    last_update_path = OUTPUT_DIR / "last_update.json"
+
+    with open(last_update_path, "w", encoding="utf-8") as f:
+        json.dump({
+            "last_update": datetime.now(UTC).isoformat()
+        }, f, indent=2)
+
+    log(f"last_update.json mis à jour : {last_update_path}")

@@ -25,6 +25,9 @@
     <div class="search-bar">
         <input type="text" id="searchInput" placeholder="Rechercher dans tous les articles…">
     </div>
+
+    <!-- BADGE PIPELINE -->
+    <span id="pipeline-status" class="pipeline-badge">Chargement…</span>
 </nav>
 
 <div class="layout">
@@ -84,8 +87,18 @@
 
     <!-- COLONNE DROITE -->
     <aside class="sidebar">
+
         <h3>Activité récente</h3>
         <canvas id="activityChart" width="300" height="200"></canvas>
+
+        <!-- STATUT PIPELINE -->
+        <h3>Mises à jour</h3>
+        <div id="pipeline-status-box"></div>
+
+        <!-- MINI LOG -->
+        <h3>Historique des mises à jour</h3>
+        <div id="update-history"></div>
+        <a href="xml/update_history.log" target="_blank">Voir le log complet</a>
 
         <h3>Derniers articles (toutes rubriques)</h3>
         <div id="articles-global"></div>
@@ -104,6 +117,53 @@
 <script src="assets/js/feeds-external.js"></script>
 <script src="assets/js/activity-chart.js"></script>
 <script src="assets/js/main.js"></script>
+
+<!-- SCRIPT PIPELINE + MINI LOG -->
+<script>
+/* --- BADGE TOP-MENU + STATUT PIPELINE --- */
+fetch("xml/last_update.json")
+  .then(r => r.json())
+  .then(data => {
+    const date = new Date(data.last_update);
+    const formatted = date.toLocaleString("fr-FR");
+
+    // Badge top-menu
+    const badge = document.getElementById("pipeline-status");
+    badge.textContent = "🟢 Mise à jour : " + formatted;
+    badge.classList.add("pipeline-ok");
+
+    // Encadré sidebar
+    document.getElementById("pipeline-status-box").innerHTML =
+      `<div class="pipeline-ok-box">
+         🟢 Mise à jour OK<br>
+         Dernière mise à jour : <strong>${formatted}</strong>
+       </div>`;
+  })
+  .catch(() => {
+    const badge = document.getElementById("pipeline-status");
+    badge.textContent = "🔴 Echec de la mise à jour";
+    badge.classList.add("pipeline-ko");
+
+    document.getElementById("pipeline-status-box").innerHTML =
+      `<div class="pipeline-ko-box">
+         🔴 Echec de la mise à jour<br>
+         Impossible de lire last_update.json
+       </div>`;
+  });
+
+/* --- MINI LOG DES MISES À JOUR --- */
+fetch("xml/update_history.log")
+  .then(r => r.text())
+  .then(text => {
+    const lines = text.trim().split("\n").slice(-5).reverse();
+    document.getElementById("update-history").innerHTML =
+      "<ul>" + lines.map(l => `<li>${l}</li>`).join("") + "</ul>";
+  })
+  .catch(() => {
+    document.getElementById("update-history").innerHTML =
+      "<em>Historique indisponible</em>";
+  });
+</script>
 
 </body>
 </html>
