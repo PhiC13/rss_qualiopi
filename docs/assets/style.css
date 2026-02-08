@@ -339,3 +339,24 @@ footer {
     font-size: 0.75rem;
     color: #0066cc;
 }
+
+.activity-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+
+.activity-controls label {
+    font-weight: 600;
+}
+
+.activity-controls select {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #aaa;
+    background: #f8f8f8;
+    font-size: 14px;
+    cursor: pointer;
+}
