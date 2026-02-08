@@ -4,7 +4,7 @@ name: Generate RSS Feeds
 
 on:
   schedule:
-    - cron: "0 * * * *"   # exécution toutes les heures
+    - cron: "0 6,18 * * *"   # exécution à 06h00 et 18h00
   workflow_dispatch:
 
 jobs:

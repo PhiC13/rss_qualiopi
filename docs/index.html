@@ -86,23 +86,30 @@
     </div>
 
     <!-- COLONNE DROITE -->
-    <aside class="sidebar">
+	<aside class="sidebar">
 
-        <h3>Activité récente</h3>
-        <canvas id="activityChart" width="300" height="200"></canvas>
+		<!-- Bloc 1 : Activité récente -->
+		<div class="sidebar-block">
+			<h3><span class="icon">📊</span> Activité récente</h3>
+			<canvas id="activityChart" width="300" height="200"></canvas>
+		</div>
 
-        <!-- STATUT PIPELINE -->
-        <h3>Mises à jour</h3>
-        <div id="pipeline-status-box"></div>
+		<!-- Bloc 2 : Mises à jour -->
+		<div class="sidebar-block">
+			<h3><span class="icon">⏱️</span> Mises à jour</h3>
+			<div id="pipeline-status-box" class="update-box"></div>
 
-        <!-- MINI LOG -->
-        <h3>Historique des mises à jour</h3>
-        <div id="update-history"></div>
-        <a href="xml/update_history.log" target="_blank">Voir le log complet</a>
+			<div id="update-history" class="update-history"></div>
+			<a href="xml/update_history.log" target="_blank" class="history-link">Voir le log complet</a>
+		</div>
 
-        <h3>Derniers articles (toutes rubriques)</h3>
-        <div id="articles-global"></div>
-    </aside>
+		<!-- Bloc 3 : Derniers articles -->
+		<div class="sidebar-block">
+			<h3><span class="icon">📰</span> Derniers articles</h3>
+			<div id="articles-global"></div>
+		</div>
+
+	</aside>
 
 </div>
 
@@ -155,7 +162,18 @@ fetch("xml/last_update.json")
 fetch("xml/update_history.log")
   .then(r => r.text())
   .then(text => {
-    const lines = text.trim().split("\n").slice(-5).reverse();
+	/* --- MINI LOG DES MISES À JOUR --- */
+	fetch("xml/update_history.log")
+	.then(r => r.text())
+	.then(text => {
+		const lines = text.trim().split("\n").slice(-3).reverse();
+		document.getElementById("update-history").innerHTML =
+		"<ul>" + lines.map(l => `<li>${l}</li>`).join("") + "</ul>";
+	})
+	.catch(() => {
+		document.getElementById("update-history").innerHTML =
+		"<em>Historique indisponible</em>";
+	});
     document.getElementById("update-history").innerHTML =
       "<ul>" + lines.map(l => `<li>${l}</li>`).join("") + "</ul>";
   })

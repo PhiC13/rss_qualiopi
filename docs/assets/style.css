@@ -1,6 +1,6 @@
-/* -----------------------------------------
+/* =========================================================
    1. VARIABLES
------------------------------------------ */
+========================================================= */
 :root {
     --yellow: #f7c600;
     --dark: #222;
@@ -9,9 +9,9 @@
     --blue: #003366;
 }
 
-/* -----------------------------------------
+/* =========================================================
    2. BASE
------------------------------------------ */
+========================================================= */
 body {
     font-family: "Segoe UI", Roboto, Arial, sans-serif;
     margin: 0;
@@ -20,9 +20,9 @@ body {
     color: var(--dark);
 }
 
-/* -----------------------------------------
+/* =========================================================
    3. HEADER
------------------------------------------ */
+========================================================= */
 header {
     background: var(--blue);
     color: var(--light);
@@ -49,9 +49,9 @@ header .title-block p {
     opacity: 0.9;
 }
 
-/* -----------------------------------------
+/* =========================================================
    4. MENU HORIZONTAL
------------------------------------------ */
+========================================================= */
 .top-menu {
     background: var(--light);
     padding: 6px 20px;
@@ -74,9 +74,9 @@ header .title-block p {
     color: var(--yellow);
 }
 
-/* -----------------------------------------
+/* =========================================================
    5. LAYOUT
------------------------------------------ */
+========================================================= */
 .layout {
     display: flex;
     gap: 30px;
@@ -99,9 +99,9 @@ header .title-block p {
     top: 20px;
 }
 
-/* -----------------------------------------
+/* =========================================================
    6. BLOCS EXTENSIBLES (SECTIONS)
------------------------------------------ */
+========================================================= */
 details.section-block {
     background: var(--light);
     padding: 15px 20px;
@@ -121,9 +121,9 @@ details[open] summary {
     color: var(--blue);
 }
 
-/* -----------------------------------------
+/* =========================================================
    7. ARTICLES
------------------------------------------ */
+========================================================= */
 .article-mini {
     font-size: 0.85rem;
     margin-bottom: 4px;
@@ -140,7 +140,7 @@ details[open] summary {
     color: #666;
 }
 
-/* Blocs par source */
+/* Groupes */
 .article-group > summary {
     font-size: 0.9rem;
     font-weight: 600;
@@ -155,13 +155,9 @@ details[open] summary {
     opacity: 0.7;
 }
 
-.empty-source > summary::before {
-    color: #bbb !important;
-}
-
-/* -----------------------------------------
+/* =========================================================
    8. BARRE DE RECHERCHE
------------------------------------------ */
+========================================================= */
 .search-bar {
     margin: 20px auto;
     max-width: 600px;
@@ -176,9 +172,9 @@ details[open] summary {
     border-radius: 6px;
 }
 
-/* -----------------------------------------
+/* =========================================================
    9. FLUX CONSOLIDÉ
------------------------------------------ */
+========================================================= */
 .flux-consolidated {
     text-align: right;
     font-size: 0.7rem;
@@ -196,9 +192,9 @@ details[open] summary {
     text-decoration: underline;
 }
 
-/* -----------------------------------------
+/* =========================================================
    10. FOOTER
------------------------------------------ */
+========================================================= */
 footer {
     margin-top: 60px;
     padding: 20px;
@@ -207,17 +203,17 @@ footer {
     color: var(--light);
 }
 
-/* -----------------------------------------
+/* =========================================================
    11. ADMIN SOURCES
------------------------------------------ */
-
+========================================================= */
 .admin-container {
     max-width: 900px;
     margin: 40px auto;
     padding: 0 20px;
 }
 
-.token-box {
+.token-box,
+.source-form {
     background: var(--light);
     padding: 15px 20px;
     border-radius: 6px;
@@ -245,11 +241,6 @@ footer {
     width: 20px;
     height: 20px;
     margin-right: 8px;
-    vertical-align: middle;
-}
-
-.source-actions button {
-    margin-left: 8px;
 }
 
 .btn-edit {
@@ -270,25 +261,11 @@ footer {
     cursor: pointer;
 }
 
-.source-form {
-    background: var(--light);
-    padding: 20px;
-    border-radius: 6px;
-    border-left: 5px solid var(--yellow);
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
+/* =========================================================
+   12. PIPELINE + SIDEBAR
+========================================================= */
 
-#validation-status {
-    font-size: 0.9rem;
-    margin-top: 5px;
-}
-
-/* -----------------------------------------
-   12. PIPELINE STATUS
------------------------------------------ */
-
+/* Badge top-menu */
 .pipeline-badge {
     margin-left: auto;
     padding: 4px 10px;
@@ -307,12 +284,13 @@ footer {
     color: #a30000;
 }
 
+/* Encadrés pipeline */
 .pipeline-ok-box,
 .pipeline-ko-box {
     padding: 10px;
     border-radius: 6px;
     margin-bottom: 10px;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
 }
 
 .pipeline-ok-box {
@@ -323,4 +301,41 @@ footer {
 .pipeline-ko-box {
     background: #ffe8e8;
     border-left: 5px solid #a30000;
+}
+
+/* Sidebar blocks */
+.sidebar-block {
+    padding-bottom: 20px;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Icônes */
+.sidebar-block h3 .icon {
+    margin-right: 6px;
+    font-size: 1.1rem;
+}
+
+/* Dernière mise à jour */
+.update-box {
+    font-size: 0.85rem;
+    line-height: 1.3;
+    margin-bottom: 10px;
+}
+
+/* Historique */
+.update-history {
+    font-size: 0.75rem;
+    color: #555;
+    margin-bottom: 6px;
+}
+
+.update-history ul {
+    padding-left: 18px;
+    margin: 0;
+}
+
+.history-link {
+    font-size: 0.75rem;
+    color: #0066cc;
 }
