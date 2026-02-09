@@ -3,57 +3,109 @@
 <head>
   <meta charset="UTF-8">
   <title>Gestion des sources RSS</title>
+
   <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
 </head>
 
 <body>
 
   <header>
-    <img src="../assets/img/logo.png" class="logo" alt="">
+    <img src="../img/Logo_LBJ-13A.png" alt="Logo Le Bateau Jaune" class="logo">
     <div class="title-block">
       <h1>Administration des sources RSS</h1>
-      <p>Ajouter, modifier, supprimer les flux Qualiopi</p>
+      <p>Gérer les flux distants utilisés par le pipeline</p>
     </div>
   </header>
 
-  <nav class="top-menu">
+  <nav class="top-menu" aria-label="Navigation principale">
     <a href="../index.html">Accueil</a>
-    <a href="sources.html">Sources</a>
+    <a href="sources.html" class="active" aria-current="page">Sources</a>
+  
+    <div class="top-tools">
+      <input type="text" id="search-input" placeholder="Rechercher un flux…">
+    </div>
   </nav>
 
-  <div class="admin-container">
+  <main class="admin-container">
 
-    <section class="token-box">
+    <!-- TOKEN -->
+    <section class="token-box" aria-labelledby="token-title">
+      <h2 id="token-title" class="visually-hidden">Token GitHub</h2>
+
       <label for="token">Token GitHub (fine-grained)</label>
-      <input type="password" id="token" placeholder="ghp_xxxxx" />
+      <input type="password" id="token" placeholder="ghp_xxxxx" autocomplete="off">
       <button id="save-token" class="btn-primary">Enregistrer le token</button>
+      <br> 
+      <small class="token-help">
+        Le token est stocké uniquement dans ce navigateur (localStorage).
+      </small>
     </section>
 
-    <section id="sources-list" class="sources-list"></section>
+    <!-- (SUPPRIMÉ) Bouton revérifier tous les flux -->
+    <!-- <button id="recheck-all" class="btn-primary" style="margin-bottom:20px;">Revérifier tous les flux</button> -->
+
+    <!-- CARTES DES CATÉGORIES -->
+    <section id="sources-list" class="sources-cards" aria-labelledby="sources-title">
+      <h2 id="sources-title" class="visually-hidden">Sources par catégorie</h2>
+    </section>
 
     <hr>
 
-    <h2 id="form-title">Ajouter une source</h2>
+    <!-- FORMULAIRE EXTERNAL_* -->
+    <section aria-labelledby="form-title">
+      <h2 id="form-title">Ajouter un flux distant</h2>
 
-    <form id="source-form" class="source-form">
-      <label>Nom</label>
-      <input type="text" id="src-name" required>
+      <form id="source-form" class="source-form" novalidate>
 
-      <label>URL du flux</label>
-      <input type="url" id="src-url" required>
+        <!-- Ligne Catégorie + URL -->
+        <div class="form-row">
 
-      <label>Catégorie</label>
-      <input type="text" id="src-cat">
+          <!-- Bloc Catégorie -->
+          <div class="form-group">
+            <label for="src-cat">Catégorie</label><br>
+            <select id="src-cat">
+              <option value="">— Choisir une catégorie —</option>
+              <option value="legal">Légal</option>
+              <option value="pedago">Pédagogie</option>
+              <option value="metiers">Métiers</option>
+            </select>
+          </div>
 
-      <input type="hidden" id="src-index">
+          <!-- Bloc URL -->
+          <div class="form-group" style="flex:1;">
+            <label for="src-url">URL du flux RSS</label><br>
+            <input type="url" id="src-url" required aria-required="true" placeholder="https://…">
+          </div>
 
-      <div id="validation-status"></div>
+        </div>
 
-      <button type="submit" class="btn-primary">Enregistrer</button>
-    </form>
+        <input type="hidden" id="src-index">
 
-  </div>
+        <div id="validation-status" role="status" aria-live="polite"></div>
 
-  <script src="../assets/js/sources-admin.js"></script>
+        <div class="form-actions">
+          <button type="submit" class="btn-primary">Ajouter</button>
+          <button type="button" id="cancel-edit" class="btn-secondary" style="display:none;">Annuler</button>
+        </div>
+
+      </form>
+    </section>
+
+    <!-- EXPORT SOURCES.PY -->
+    <section class="export-box" aria-labelledby="export-title">
+      <h2 id="export-title">Sauvegarde / Export</h2>
+      <p>
+        Cette interface modifie uniquement les listes <code>EXTERNAL_*</code> dans 
+        <code>docs/sources.py</code>. Les listes <code>LOCAL_*</code> sont affichées en lecture seule.
+      </p>
+      <button id="export-sources" class="btn-save">Sauvegarder les sources</button>
+    </section>
+
+  </main>
+
+  <script src="../assets/js/admin-core.js"></script>
+  <script src="../assets/js/admin-ui.js"></script>
+
 </body>
 </html>

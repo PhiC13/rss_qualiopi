@@ -1,0 +1,343 @@
+/* ============================================================
+   STYLE ADMIN — Version nettoyée (sans pastilles)
+   ============================================================ */
+
+/* Cartes */
+.source-card {
+    background: #fff;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.source-card h3 {
+    margin: 0 0 12px 0;
+    font-size: 17px;
+    font-weight: 600;
+    color: #2a2a2a;
+}
+
+/* Ligne de flux */
+.source-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 4px;
+}
+
+.source-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+/* URL + icône RSS */
+.source-url {
+    font-size: 13px;
+    color: #333;
+    max-width: 65%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-left: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.source-url:hover {
+    color: #005bbb;
+    text-decoration: underline;
+}
+
+/* Icône RSS */
+.icon-rss {
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    background: url("data:image/svg+xml;utf8,<svg fill='%23ff6600' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M6.18 17.82a2.18 2.18 0 11-4.36 0 2.18 2.18 0 014.36 0zM.02 9.02v3.27a11.7 11.7 0 0111.7 11.7h3.27A14.97 14.97 0 00.02 9.02zm0-6v3.27A17.97 17.97 0 0118 24h3.27C21.27 10.77 13.23 2.73.02 3.02z'/></svg>") no-repeat center;
+}
+
+/* Icône fichier local */
+.icon-file {
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    background: url("data:image/svg+xml;utf8,<svg fill='%23777' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z'/></svg>") no-repeat center;
+    margin-right: 6px;
+}
+
+/* Boutons dans les lignes de flux */
+.source-actions {
+    display: flex;
+    gap: 6px;
+}
+
+.btn-edit,
+.btn-delete {
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Icône modifier */
+.btn-edit::before {
+    content: "";
+    width: 12px;
+    height: 12px;
+    background: url("data:image/svg+xml;utf8,<svg fill='%230047b3' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25z'/></svg>") no-repeat center;
+}
+
+.btn-edit {
+    background: #e6f0ff;
+    color: #0047b3;
+}
+
+.btn-edit:hover {
+    background: #d6e7ff;
+}
+
+/* Icône supprimer */
+.btn-delete::before {
+    content: "";
+    width: 12px;
+    height: 12px;
+    background: url("data:image/svg+xml;utf8,<svg fill='%23b30000' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M6 19a2 2 0 002 2h8a2 2 0 002-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z'/></svg>") no-repeat center;
+}
+
+.btn-delete {
+    background: #ffe6e6;
+    color: #b30000;
+}
+
+.btn-delete:hover {
+    background: #ffd6d6;
+}
+
+/* Section flux locaux */
+.local-section {
+    margin-top: 14px;
+    padding: 12px;
+    background: #f7f7f7;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+}
+
+.local-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 6px;
+}
+
+.local-list {
+    margin: 0;
+    padding-left: 18px;
+}
+
+.local-list li {
+    font-size: 13px;
+    color: #444;
+    margin-bottom: 3px;
+    display: flex;
+    align-items: center;
+}
+
+/* Style natif propre pour les selects */
+select {
+    font-size: 14px;
+    padding: 6px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #333;
+}
+
+/* Style natif propre pour les inputs */
+input[type="url"],
+input[type="text"],
+input[type="password"] {
+    font-size: 14px;
+    padding: 6px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    color: #333;
+}
+
+/* Style natif propre pour les boutons */
+button,
+input[type="submit"] {
+    font-size: 14px;
+    padding: 6px 12px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background: #f5f5f5;
+    color: #333;
+    cursor: pointer;
+}
+
+button:hover,
+input[type="submit"]:hover {
+    background: #e9e9e9;
+}
+
+/* Bouton Sauvegarde (style bleu arrondi) */
+.btn-save {
+    background: #0066ff;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-save:hover {
+    background: #0052cc;
+}
+
+/* Formulaire : alignement horizontal */
+.form-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 12px;
+}
+
+#src-cat {
+    width: 160px;
+}
+
+#src-url {
+    flex: 1;
+    width: 90%;
+    max-width: none;
+    margin-top: 0;
+}
+
+
+label[for="src-url"] {
+    margin-top: 0;
+    white-space: nowrap;
+}
+
+/* Espace avant le bouton Enregistrer */
+.form-actions {
+    margin-top: 14px;
+}
+
+/* Texte plus petit pour la phrase d’info de sauvegarde */
+.export-box p {
+    font-size: 13px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+/* Top menu aligné */
+.top-menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Outils alignés à droite */
+.top-tools {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-left: auto;
+}
+
+/* Champ de recherche */
+#search-input {
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    width: 220px;
+}
+
+/* ============================================================
+   MODE SOMBRE AUTOMATIQUE
+   ============================================================ */
+
+@media (prefers-color-scheme: dark) {
+
+  body {
+    background: #1e1e1e;
+    color: #e6e6e6;
+  }
+
+  .source-card {
+    background: #2a2a2a;
+    border-color: #444;
+    box-shadow: none;
+  }
+
+  .source-card h3 {
+    color: #fff;
+  }
+
+  .source-item {
+    border-bottom-color: #555;
+  }
+
+  .source-url {
+    color: #ddd;
+  }
+
+  .source-url:hover {
+    color: #66aaff;
+  }
+
+  .local-section {
+    background: #333;
+    border-color: #555;
+  }
+
+  .local-title {
+    color: #ccc;
+  }
+
+  .local-list li {
+    color: #ddd;
+  }
+
+  select,
+  input[type="url"],
+  input[type="text"],
+  input[type="password"] {
+    background: #2a2a2a;
+    color: #eee;
+    border-color: #555;
+  }
+
+  button,
+  input[type="submit"] {
+    background: #333;
+    color: #eee;
+    border-color: #555;
+  }
+
+  button:hover,
+  input[type="submit"]:hover {
+    background: #444;
+  }
+
+  .btn-save {
+    background: #0052cc;
+  }
+
+  .btn-save:hover {
+    background: #003f99;
+  }
+}
