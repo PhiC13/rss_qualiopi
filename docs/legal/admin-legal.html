@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Administration des références légales</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Thème global -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <!-- IMPORTANT : admin.css doit être chargé pour les .source-card, .source-item, .source-desc, .btn-edit, .btn-delete -->
+    <link rel="stylesheet" href="../assets/css/admin.css">
+
+    <!-- Spécifique à l’admin légal (si tu veux ajouter des règles propres) -->
+    <link rel="stylesheet" href="../assets/css/legal-admin.css">
+</head>
+
+<body>
+
+<header>
+    <img src="../img/Logo_LBJ-13A.png" class="logo" alt="Logo">
+    <div class="title-block">
+        <h1>Administration – Références légales</h1>
+        <p>Gestion des catégories et articles</p>
+    </div>
+</header>
+
+<nav class="top-menu">
+    <a href="../index.html">Accueil</a>
+    <a href="../dashboard.html">Dashboard</a>
+    <a href="../legal/legal.html">Légal</a>
+    <a href="admin-legal.html" class="active">Admin Légal</a>
+
+    <div class="top-tools">
+        <input type="text" id="search-input" placeholder="Rechercher…">
+    </div>
+</nav>
+
+<main class="admin-container">
+
+    <!-- LISTE DES CATÉGORIES + ARTICLES -->
+    <section id="legal-list" class="sources-cards" aria-labelledby="legal-title">
+        <h2 id="legal-title" class="visually-hidden">Catégories légales</h2>
+    </section>
+
+    <hr>
+
+    <!-- FORMULAIRE AJOUT / MODIFICATION -->
+    <section aria-labelledby="form-title">
+        <h2 id="form-title">Ajouter ou modifier un article</h2>
+
+        <form id="legal-form" class="source-form" novalidate>
+
+            <div class="form-row">
+
+                <!-- Catégorie -->
+                <div class="form-group">
+                    <label for="cat-select">Catégorie</label><br>
+                    <select id="cat-select">
+                        <option value="">— Choisir une catégorie —</option>
+                    </select>
+                </div>
+
+                <!-- Référence -->
+                <div class="form-group" style="flex:1;">
+                    <label for="ref-input">Référence</label><br>
+                    <input type="text" id="ref-input" required placeholder="Article L.212-1">
+                </div>
+
+            </div>
+
+            <!-- Description -->
+            <div class="form-group">
+                <label for="desc-input">Description</label><br>
+                <textarea id="desc-input" required placeholder="Description de l’article"></textarea>
+            </div>
+
+            <!-- URL -->
+            <div class="form-group">
+                <label for="url-input">URL</label><br>
+                <input type="url" id="url-input" required placeholder="https://…">
+            </div>
+
+            <input type="hidden" id="edit-cat-index">
+            <input type="hidden" id="edit-item-index">
+
+            <div class="form-actions">
+                <button type="submit" class="btn-primary">Ajouter</button>
+                <button type="button" id="cancel-edit" class="btn-secondary" style="display:none;">Annuler</button>
+            </div>
+
+        </form>
+    </section>
+
+    <!-- EXPORT -->
+    <section class="export-box" aria-labelledby="export-title">
+        <h2 id="export-title">Sauvegarde / Export</h2>
+        <p>
+            Cette interface modifie uniquement le fichier <code>legal.json</code>.
+            Téléchargez-le puis remplacez-le dans <code>/legal/data/</code>.
+        </p>
+        <button id="export-legal" class="btn-save">Exporter legal.json</button>
+    </section>
+
+</main>
+
+<footer>
+    Admin Légal – Le Bateau Jaune
+</footer>
+
+<script src="../assets/js/legal-admin.js"></script>
+
+</body>
+</html>

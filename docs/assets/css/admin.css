@@ -341,3 +341,42 @@ label[for="src-url"] {
     background: #003f99;
   }
 }
+
+.source-desc {
+    font-size: 11px;
+    color: #000;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 35%;
+    margin-left: 8px;
+}
+
+#legal-list .source-desc {
+    font-size: 13px;
+    color: #000;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 55%;
+    margin-left: 6px;
+    display: inline-block;
+}
+
+#desc-input {
+    width: 100%;
+    min-height: 80px;
+    font-size: 15px;
+    padding: 8px;
+    resize: vertical;
+}
+
+/* Agrandir les champs Référence et URL dans l’admin légal */
+#ref-input,
+#url-input {
+    width: 100%;
+    font-size: 14px;      
+    padding: 10px;        /* plus confortable */
+    box-sizing: border-box;
+}
+
