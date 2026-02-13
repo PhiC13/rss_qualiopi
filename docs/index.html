@@ -5,6 +5,7 @@
     <title>Veille Le Bateau Jaune – Philippe</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="assets/css/style.css">
+	<link rel="stylesheet" href="../assets/css/legal.css">
 </head>
 
 <body>
@@ -18,17 +19,21 @@
 </header>
 
 <nav class="top-menu">
-    <a href="index.html">Accueil</a>
-    <a href="dashboard.html">Dashboard</a>
-    <a href="xml/logs.jsonl" target="_blank">Logs</a>
-
-    <div class="search-bar">
-        <input type="text" id="searchInput" placeholder="Rechercher dans tous les articles…">
+    <div class="nav-left">
+        <a href="../index.html">Accueil</a>
+        <a href="../legal/legal.html" class="active">Références Légales</a>
     </div>
 
-    <!-- BADGE PIPELINE -->
-    <span id="pipeline-status" class="pipeline-badge">Chargement…</span>
+    <div class="nav-center">
+        <input type="text" id="legal-search" placeholder="Rechercher…" />
+    </div>
+
+    <div class="nav-right">
+		<span id="pipeline-status" class="pipeline-badge">Chargement…</span>
+	</div>
 </nav>
+
+
 
 <div class="layout">
 
@@ -117,6 +122,8 @@
 
 			<div id="update-history" class="update-history"></div>
 			<a href="xml/update_history.log" target="_blank" class="history-link">Voir le log complet</a>
+			<a href="../dashboard.html" target="_blank" class="history-link">Dashboard COSMOS</a>
+			<a href="../xml/logs.jsonl" target="_blank" class="history-link">Logs</a>
 		</div>
 
 		<!-- Bloc 3 : Derniers articles -->
@@ -130,7 +137,7 @@
 </div>
 
 <footer>
-    Agrégateur RSS – Philippe – Propulsé par Python & o2switch
+    Agrégateur RSS – Philippe – Le Bateau Jaune - Propulsé par Python & o2switch
 </footer>
 
 <!-- Scripts dans le bon ordre -->

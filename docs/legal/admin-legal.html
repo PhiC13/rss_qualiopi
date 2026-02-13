@@ -26,14 +26,16 @@
 </header>
 
 <nav class="top-menu">
-    <a href="../index.html">Accueil</a>
-    <a href="../dashboard.html">Dashboard</a>
-    <a href="../legal/legal.html">Légal</a>
-    <a href="admin-legal.html" class="active">Admin Légal</a>
+    <div class="nav-left">
+        <a href="../index.html">Accueil</a>
+        <a href="../legal/legal.html">Références Légales</a>
+	</div>
 
-    <div class="top-tools">
-        <input type="text" id="search-input" placeholder="Rechercher…">
+    <div class="nav-center">
+        <input type="text" id="legal-search" placeholder="Rechercher…" />
     </div>
+
+    <div class="nav-right"></div>
 </nav>
 
 <main class="admin-container">
@@ -99,13 +101,13 @@
             Cette interface modifie uniquement le fichier <code>legal.json</code>.
             Téléchargez-le puis remplacez-le dans <code>/legal/data/</code>.
         </p>
-        <button id="export-legal" class="btn-save">Exporter legal.json</button>
+        <button id="export-legal" class="btn-save">Sauvegarder les références</button>
     </section>
 
 </main>
 
 <footer>
-    Admin Légal – Le Bateau Jaune
+    Agrégateur RSS – Philippe – Le Bateau Jaune - Propulsé par Python & o2switch
 </footer>
 
 <script src="../assets/js/legal-admin.js"></script>

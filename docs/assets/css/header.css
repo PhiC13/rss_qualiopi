@@ -1,0 +1,28 @@
+/* =========================================================
+   3. HEADER
+========================================================= */
+header {
+    background: var(--blue);
+    color: var(--light);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    border-bottom: 4px solid var(--yellow);
+}
+
+header .logo {
+    height: 48px;
+}
+
+header .title-block h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+header .title-block p {
+    margin: 0;
+    font-size: 14px;
+    opacity: 0.9;
+}

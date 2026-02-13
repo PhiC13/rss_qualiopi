@@ -1,0 +1,36 @@
+/* =========================================================
+   5. LAYOUT
+========================================================= */
+.layout {
+    display: flex;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.main-column {
+    flex: 3;
+}
+
+.sidebar {
+    flex: 1;
+    background: var(--light);
+    padding: 20px;
+    border-radius: 6px;
+    border-left: 5px solid var(--yellow);
+    position: sticky;
+    top: 20px;
+}
+
+/* =========================================================
+   10. FOOTER
+========================================================= */
+footer {
+    margin-top: 10px;
+    padding: 10px;
+    text-align: center;
+    background: var(--dark);
+    color: var(--light);
+	font-size: 12px;
+}

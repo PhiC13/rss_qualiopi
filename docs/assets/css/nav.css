@@ -1,0 +1,55 @@
+/* =========================================================
+   4. MENU HORIZONTAL
+========================================================= */
+.top-menu {
+    background: var(--light);
+    padding: 6px 20px;
+    display: flex;
+    gap: 20px;
+    border-bottom: 2px solid var(--blue);
+    align-items: center;
+	justify-content: center;
+}
+
+.top-menu a {
+    color: var(--blue);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 4px 0;
+    transition: 0.2s;
+}
+
+.top-menu a:hover {
+    color: var(--yellow);
+}
+
+/* Liens à gauche */
+.nav-left {
+    display: flex;
+    gap: 25px;
+}
+
+/* Recherche au centre */
+.nav-center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+/* Espaceur à droite pour équilibrer */
+.nav-right {
+    width: 220px;
+    flex: 1;
+    display: flex;
+    justify-content: right;
+}
+
+/* Champ de recherche */
+#legal-search {
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    width: 220px;
+}

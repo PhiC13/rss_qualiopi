@@ -135,3 +135,44 @@
     line-height: 1.2;
     color: #555;
 }
+
+/* ============================
+   NAVIGATION AVEC RECHERCHE CENTRÉE
+============================ */
+
+.top-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Liens à gauche */
+.nav-left {
+    display: flex;
+    gap: 25px;
+}
+
+/* Recherche au centre */
+.nav-center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+/* Espaceur à droite pour équilibrer */
+.nav-right {
+    width: 220px;
+    flex: 1;
+    display: flex;
+    justify-content: right;
+}
+
+/* Champ de recherche */
+#legal-search {
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    width: 220px;
+}
